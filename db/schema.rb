@@ -11,10 +11,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417233312) do
+ActiveRecord::Schema.define(version: 20160418011021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "days", force: :cascade do |t|
+    t.integer  "score",      default: 0, null: false
+    t.string   "exercise"
+    t.integer  "weight"
+    t.date     "date_on"
+    t.integer  "kcal"
+    t.integer  "oz_drank"
+    t.text     "note"
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "days", ["user_id"], name: "index_days_on_user_id", using: :btree
+
+  create_table "foods", force: :cascade do |t|
+    t.string   "name",                         null: false
+    t.integer  "kcal"
+    t.string   "serving_size"
+    t.string   "serving_type"
+    t.text     "note"
+    t.integer  "meals_ate",    default: 0,     null: false
+    t.integer  "servings_ate", default: 0,     null: false
+    t.boolean  "quickadd",     default: false, null: false
+    t.boolean  "favorite",     default: false, null: false
+    t.boolean  "hidden",       default: false, null: false
+    t.integer  "creator_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "foods", ["creator_id"], name: "index_foods_on_creator_id", using: :btree
+  add_index "foods", ["name"], name: "index_foods_on_name", using: :btree
+
+  create_table "meals", force: :cascade do |t|
+    t.integer  "kcal"
+    t.integer  "oz_drank"
+    t.datetime "mealtime"
+    t.text     "note"
+    t.integer  "hunger_start"
+    t.integer  "thirst_start"
+    t.integer  "hunger_end"
+    t.integer  "thirst_end"
+    t.integer  "day_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "meals", ["day_id"], name: "index_meals_on_day_id", using: :btree
+
+  create_table "portions", force: :cascade do |t|
+    t.integer  "kcal"
+    t.integer  "servings_count"
+    t.integer  "meal_id"
+    t.integer  "food_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "portions", ["food_id"], name: "index_portions_on_food_id", using: :btree
+  add_index "portions", ["meal_id"], name: "index_portions_on_meal_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
