@@ -37,8 +37,6 @@ ActiveRecord::Schema.define(version: 20160418011021) do
     t.string   "serving_size"
     t.string   "serving_type"
     t.text     "note"
-    t.integer  "meals_ate",    default: 0,     null: false
-    t.integer  "servings_ate", default: 0,     null: false
     t.boolean  "quickadd",     default: false, null: false
     t.boolean  "favorite",     default: false, null: false
     t.boolean  "hidden",       default: false, null: false

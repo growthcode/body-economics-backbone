@@ -6,8 +6,6 @@ class CreateFoods < ActiveRecord::Migration
       t.string  :serving_size
       t.string  :serving_type
       t.text    :note
-      t.integer :meals_ate,     null: false, default: 0
-      t.integer :servings_ate,  null: false, default: 0
       t.boolean :quickadd,      null: false, default: false
       t.boolean :favorite,      null: false, default: false
       t.boolean :hidden,        null: false, default: false

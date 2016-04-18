@@ -15,6 +15,7 @@
 //= require_tree .
 //= require underscore
 //= require backbone
+//= require bootstrap
 //= require body_economics
 //= require_tree ../templates
 //= require_tree ./models

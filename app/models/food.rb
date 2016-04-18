@@ -8,7 +8,7 @@ class Food < ActiveRecord::Base
   # belongs_to :user, inverse_of: :foods
 
   # has_many :tags, dependent: :destroy
-  belongs_to :creator, class: 'User'
+  belongs_to :creator, class_name: 'User'
 
-  validates [:name, :creator_id], presence: true
+  validates :name, :creator_id, presence: true
 end
